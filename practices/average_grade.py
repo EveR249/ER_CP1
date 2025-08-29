@@ -11,3 +11,5 @@ p7=float(input("What is your grade in seventh period?\n"))
 avg = round((p1+p2+p3+p4+p5+p6+p7)/7, 2)
 
 print("Your average grade is:", avg)
+
+# Test
