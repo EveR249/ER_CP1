@@ -11,4 +11,4 @@ eq5 = num1%num2
 eq6 = num1/num2
 eq7 = num1//num2
 
-print(f"{num1}+{num2}={eq1}\n{num1}-{num2}={eq2}\n{num1}*{num2}={eq3}\n{num1}^{num2}={eq4}\n{num1}%{num2}={eq5}\n{num1}/{num2}={eq6:.2f}\n{num1}//{num2}={eq7}")
+print(f"Equation 1: {num1}+{num2}={eq1:.2f}\n\nEquation 2: {num1}-{num2}={eq2:.2f}\n\nEquation 3: {num1}*{num2}={eq3:.2f}\n\nEquation 4: {num1}^{num2}={eq4:.2f}\n\nEquation 5: {num1}%{num2}={eq5:.2f}\n\nEquation 6: {num1}/{num2}={eq6:.2f}\n\nEquation 7: {num1}//{num2}={eq7:.2f}")
