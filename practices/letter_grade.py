@@ -1,9 +1,9 @@
 #ER 2nd What is my grade?
 
-grade = float(input("What is your percentage grade? "))
+grade = float(input("What is your percentage grade? (Don't include the % sign) "))
   
 if grade > 100:
-    print(f"You have a {grade:.2f}% in the class, which is higher than an A!")
+    print(f"You have a {grade:.2f}% in the class, which is better than an A!")
 elif grade >= 94:
     print(f"You have a {grade:.2f}% in the class, which is an A!")
 elif grade >= 90:
