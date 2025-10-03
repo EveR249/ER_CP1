@@ -4,7 +4,25 @@ import random
 player_wins = 0
 computer_wins = 0
 
+rock = """  ____
+ /    \ 
+|      |
+ \____/ """
+
+
+paper = """_____
+|----|
+|----|
+|____|"""
+
+scissors = """ /|  |\ 
+ \|  |/
+   \/
+  //\\\ 
+ ()  ()"""
+
 print("Welcome to Rock, Paper, Scissors.")
+print(f"{rock} {paper} {scissors}")
 
 while player_wins >= 0:
     comp = random.randint(1,4)
@@ -38,10 +56,3 @@ while player_wins >= 0:
         break
 
 print("Thank you for playing!")
-
-scissors = """/|  |\ 
-\|  |/
-  \/
-()  ()"""
-
-print(scissors)
