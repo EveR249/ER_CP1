@@ -1,0 +1,41 @@
+ER 2nd TIC TAC TOE PSEUDOCODE
+import random numbers
+
+create a list (BOARD) where the rows are other smaller lists
+board = [[1,2,3]
+[4,5,6]
+[6,7,8]]
+create a win variable = 0
+
+display a welcome message
+
+start a while loop where condition is win < 1 
+   print BOARD (for list in board print list) and ask what row and then what column they want to get the index 
+        check if spot is taken by either an X or an O already and if so 
+        display invalid, select again
+            continue
+        else we would
+            change what they chose to == "X"
+        import 2 random numbers (1,10) to get the row and column for the computers spot
+        check if spot is taken by either an X or an O already and if so 
+            generate a different number
+        else we would 
+            change the computers spot to == "O"
+
+    check if row lists == each other (all x or all o)
+        display either x or o wins
+        win +=1
+        display thank you for playing
+        break
+    or if any of the columns == each other
+        display either x or o wins
+        win +=1
+        display thank you for playing
+        break
+    or if the diagonals (found with index) == each other
+        display either x or o wins
+        win +=1
+        display thank you for playing
+        break
+    else 
+        continue
