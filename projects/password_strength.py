@@ -1,6 +1,6 @@
 #ER 2nd Password strength checker
 
-#Set strength = 3
+#Set strength = 4
 strength = 4
 #set list or special characters
 specials = ["!","@","#","$","%","^","&","*","(",")","_","+","-","=","[","]","{","}","|",";",":",".","<",">","?"]
@@ -34,7 +34,7 @@ if lowercase != True:
 #Strength -=1
     strength -=1
     print("You need to have a lowercase in your password")
-#If you cant find !@#$%^&*()_+-=[]{}|;:,.<>? using find
+#If you can find !@#$%^&*()_+-=[]{}|;:,.<>? 
 for x in specials:
     password.find(x)
     if x in password:
