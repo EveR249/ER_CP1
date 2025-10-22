@@ -2,6 +2,8 @@
 
 #create encoding function
 def encode():
+    #create empty list and string
+    letter_list = []
     #get the message you want to code
     message = input("What message would you like to encode? ").upper().strip()
     #input how far they want to shift
@@ -14,24 +16,51 @@ def encode():
     #if number is greater than z restart back at a
         if new > 90:
             new -=26
-    #turn adjusted numbers back into letters suing a for loop
+        if new <= 64:
+            new = char
+    #turn adjusted numbers back into letters
         letter = chr(new)
     #code = adjustedcode
-        print(letter)
+        letter_list.append(letter)
     #return code
-    return 
+        x = ""
+        encoded_message = x.join(letter_list)
+    return encoded_message
+
 #create decoding function
+def decode():
+    letter_list = []
     #get the coded message
-    #for every character turn it into numbers
+    message = input("What message would you like to decode? ").upper()
     #get how far it was shifted
+    shift = int(input("How far was it shifted? "))
+    #for every character turn it into numbers
+    for char in message:
+        char = ord(char)
     #subtract how far it shifted from all the numbers
+        new = char - shift
     #make it go right from a to z
-    #Turn back into letters using a for loop
+        if new > 90:
+            new +=26
+        if new <= 64:
+            new = char
+    #Turn back into letters
+        letter = chr(new)
     #newmessage = adjustedcode
+        letter_list.append(letter)
     #return newmessage
+        x = ""
+        encoded_message = x.join(letter_list)
+    return encoded_message
 
+while True:
 #while true
+    choice = int(input("What option are you choosing? 1. Encode 2. Decode or 3. Exit  "))
 #ask if they want to do option 1 encode option 2 decode and call the appropriate function or option 3 exit
+    if choice == 1:
+        print(f"{encode()}")
+    elif choice == 2:
+        print(f"{decode()}")
+    else:
+        break
 #If that gives the functions and the else breaks
-
-print(f"{encode()}")
