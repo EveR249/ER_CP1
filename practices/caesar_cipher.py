@@ -67,4 +67,4 @@ while True:
         print(f"{decode()}")
     else:
         break
-#If that gives the functions and the else breaks
+#If that gives the functions and the else will use a break statement
