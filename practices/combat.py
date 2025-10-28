@@ -7,7 +7,7 @@ monster_hp = 40
 monster_defense = 10
 run = 0
 
-def user_turn(health, monster_hp, monster_defense, run):
+def user_turn(health, monster_hp, monster_defense, run, turn):
     print("What would you like to do?")
     if fight_class == 1:
         move = int(input("1. Normal Attack \n 2. Drink healing potion (regain 9 health) \n 3. Flee (may or may not get away) \n 4. Wild attack (More powerful, but damages you) \n"))
@@ -25,7 +25,8 @@ def user_turn(health, monster_hp, monster_defense, run):
         elif move == 3:
             run = random.randint(1,20)
             if run >16:
-                return run
+                turn = "over"
+                return turn
         elif move == 4:
             attack = random.randint(1,20) + 3
             dmg = random.randint(1,8) + 8
@@ -39,7 +40,7 @@ def user_turn(health, monster_hp, monster_defense, run):
     elif fight_class == 2:
         move = int(input("1. Normal Attack (must skip a turn to charge) \n 2. Drink healing potion (regain 9 health) \n 3. Flee (may or may not get away) \n 4. Wild attack (More powerful, but damages you \n"))
         if move == 1:
-            monster_turn()
+            monster_turn(health, defense)
             attack = random.randint(1,20) + 4
             dmg = random.randint(1,8) + 5
             if attack > monster_defense:
@@ -53,7 +54,8 @@ def user_turn(health, monster_hp, monster_defense, run):
         elif move == 3:
             run = random.randint(1,20)
             if run >16:
-                print("You escaped!")
+                turn = "over"
+                return turn
         elif move == 4:
             attack = random.randint(1,20) + 5
             dmg = random.randint(1,8) + 9
@@ -77,7 +79,8 @@ def user_turn(health, monster_hp, monster_defense, run):
         elif move == 3:
             run = random.randint(1,20)
             if run >16:
-                print("You escaped!")
+                turn = "over"
+                return turn
         elif move == 4:
             attack = random.randint(1,20) + 5
             dmg = random.randint(1,8) + 7
@@ -138,17 +141,23 @@ print("You are being attacked by Goblin!")
 turn = random.randint(1,2)
 
 while health >0 and monster_hp >0:
-    if turn == 1:  
+    if turn == 1: 
+        turn = "player"
+        continue
+    elif turn == 2:
+        turn = "monster"
+        continue
+    elif turn == "over":
+        print("You escaped!")
+        break
+    elif turn == "player":
         print("Your turn!")
-        user_turn(health, monster_hp, monster_defense, run)
-        turn +=1
-    else:
-        if run > 16:
-            break
-        else:
-            print("The Goblin's turn!")
-            monster_turn(health, defense)
-            turn -=1
+        user_turn(health, monster_hp, monster_defense, run, turn)
+        turn = "monster"
+    elif turn == "monster":
+        print("The Goblin's turn!")
+        monster_turn(health, defense)
+        turn = "player"
 else:
     if monster_hp == health:
         print("You both died!")
