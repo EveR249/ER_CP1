@@ -2,6 +2,7 @@
 import turtle
 import random
 
+#moving function
 def race():
         pink.forward(random.randint(10,40))
         purple.forward(random.randint(10,40))
