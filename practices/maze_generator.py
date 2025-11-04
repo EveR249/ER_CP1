@@ -7,7 +7,7 @@ turtle.Turtle()
 grid_row = []
 grid_col = []
 
-def draw():
+def draw(grid_row, grid_col):
     for row in grid_row:
         for spot in row:
             if spot == 1:
@@ -57,7 +57,7 @@ def isSolvable(grid_row, grid_col):
 
 
 
-while isSolvable(grid_row, grid_col) == False:
+while True:
     grid_row = [[[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)]],
              [[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)]],
              [[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)]],
@@ -73,5 +73,9 @@ while isSolvable(grid_row, grid_col) == False:
              [[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)]]]
     
     isSolvable(grid_row, grid_col)
+    if isSolvable == False:
+        continue
 
-turtle.done
+    draw(grid_row, grid_col)
+
+    turtle.done
