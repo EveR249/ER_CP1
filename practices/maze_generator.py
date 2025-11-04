@@ -2,18 +2,14 @@
 import turtle
 import random
 
-#create respective wall lists
-row_wall = ["|"," "]
-col_wall = ["_"," "]
+grid_rows = []
 
-#create empty maze
-row_grid = [[random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall)],
-            [random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall)],
-            [random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall)],
-            [random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall)],
-            [random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall)],
-            [random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall),random.choice(row_wall)]]
+grid_col = []
 
-col_grid = []
-for row in row_grid:
-    print(row)
+for spot in grid_rows:
+    if spot == 1:
+        turtle.pendown()
+        turtle.forward(100)
+    if spot == 0:
+        turtle.penup()
+        turtle.forward(100)
