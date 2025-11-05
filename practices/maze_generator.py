@@ -7,6 +7,7 @@ turtle.Turtle()
 grid_row = []
 grid_col = []
 
+#get turtle to check if pen needs to be down or not and move the distance
 def draw(grid_row, grid_col):
     for row in grid_row:
         for spot in row:
@@ -25,6 +26,7 @@ def draw(grid_row, grid_col):
                 turtle.penup()
                 turtle.forward(100)
 
+#check if maze is solvable
 def isSolvable(grid_row, grid_col):
     size = len(grid_row) - 1
     visited = set()
@@ -56,26 +58,28 @@ def isSolvable(grid_row, grid_col):
     return False
 
 
+x=0
 
-while True:
-    grid_row = [[[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)]],
-             [[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)]],
-             [[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)]],
-             [[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)]],
-             [[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)]],
-             [[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)]]]
+while x<1:
+    grid_row = [[[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]]]
 
-    grid_col = [[[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)]],
-             [[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)]],
-             [[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)]],
-             [[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)]],
-             [[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)]],
-             [[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)],[random.randint(0,2)]]]
+    grid_col = [[[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]]]
+   
     
-    isSolvable(grid_row, grid_col)
-    if isSolvable == False:
-        continue
+    #isSolvable(grid_row, grid_col)
+    #if isSolvable == False:
+        #continue
 
     draw(grid_row, grid_col)
-
     turtle.done
+    x+=1
