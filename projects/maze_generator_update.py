@@ -1,4 +1,6 @@
 #ER 2nd Maze generator
+import turtle
+import random
 
 #set variables
 #Build functions
@@ -7,13 +9,24 @@
     #make sure you set start and stop correctly
     #Use path coordinates to check walls in each direction
 #use turtle to draw the maze
-#turtle moves the distance, you determins if pen is up or down
+#turtle moves the distance, you determines if pen is up or down
 #need three functions
 
 #set list of rows 6 "columns" inside each list, 6 lists inside a big list, each spot will be randomly assigned a 1 or a 0. same thing for columns
+grid_row = [[[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+            [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+            [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+            [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+            [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+            [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]]]
 
+grid_col = [[[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+            [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+            [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+            [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+            [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+            [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]]]
 #Make a function to randomize walls
-#Remember to import random
 #select random integer either 0 or 1 for each spot in the list
 #maybe a return at the end would work
 
@@ -26,5 +39,47 @@
 
 #draw maze function
 #for every list and every spot in that list, check if it is a 1 or a 0, if it is a 1 then pen down and go forward, if 0 penup and forward 100
+#always start from left or bottom
+def draw(grid_row, grid_col):
+    for row in grid_row:
+        for spot in row:
+            if spot == 1:
+                turtle.pendown()
+                turtle.forward(100)
+            if spot == 0:
+                turtle.penup()
+                turtle.forward(100)
+    turtle.goto(-300, + 100)
+    for col in grid_col:
+        for spot in col:
+            if spot == 0:
+                turtle.penup()
+                turtle.forward(100)
+            if spot == 1:
+                turtle.pendown()
+                turtle.forward(100)
+                turtle.penup()
 
-#while true loop inside is function call for wall gen, then if solvable function is called, if it returns true, draw maze function (and break?), if it returns false continue the while loop.
+turtle.speed(5)
+turtle.penup()
+turtle.goto(-300,-300)
+turtle.forward(100)
+turtle.pendown()
+turtle.forward(500)
+turtle.left(90)
+turtle.forward(600)
+turtle.left(90)
+turtle.penup()
+turtle.forward(100)
+turtle.pendown()
+turtle.forward(500)
+turtle.left(90)
+turtle.forward(600)
+turtle.penup()
+
+turtle.goto(-200,-300)
+draw(grid_row, grid_col)
+
+turtle.done()
+
+#while true loop, inside is function call for wall gen, then if solvable function is called, if it returns true, draw maze function (and break?), if it returns false continue the while loop.
