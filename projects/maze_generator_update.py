@@ -20,11 +20,11 @@ grid_row = [[[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[
             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]]]
 
-grid_col = [[[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
+grid_col = [[[random.randint(0,0)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
-            [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]]]
+            [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,0)]]]
 #Make a function to randomize walls
 #select random integer either 0 or 1 for each spot in the list
 #maybe a return at the end would work
@@ -95,29 +95,31 @@ def draw(grid_row, grid_col):
                     turtle.penup()
             switch+=100
             turtle.goto(switch, -300)
+def setup():
+    
+    turtle.speed(5)
+    turtle.penup()
+    turtle.goto(-300,-300)
+    turtle.forward(100)
+    turtle.pendown()
+    turtle.forward(500)
+    turtle.left(90)
+    turtle.forward(600)
+    turtle.left(90)
+    turtle.penup()
+    turtle.forward(100)
+    turtle.pendown()
+    turtle.forward(500)
+    turtle.left(90)
+    turtle.forward(600)
+    turtle.penup()
 
-turtle.speed(5)
-turtle.penup()
-turtle.goto(-300,-300)
-turtle.forward(100)
-turtle.pendown()
-turtle.forward(500)
-turtle.left(90)
-turtle.forward(600)
-turtle.left(90)
-turtle.penup()
-turtle.forward(100)
-turtle.pendown()
-turtle.forward(500)
-turtle.left(90)
-turtle.forward(600)
-turtle.penup()
+    turtle.goto(-300,-200)
+    turtle.left(90)
 
-turtle.goto(-300,-200)
-turtle.left(90)
+setup()
 isSolvable(grid_row, grid_col)
-if isSolvable == True:
-    draw(grid_row, grid_col)
+draw(grid_row, grid_col)
     
 
 turtle.done()
