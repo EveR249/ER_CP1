@@ -14,6 +14,9 @@ import random
 
 #set list of rows 6 "columns" inside each list, 6 lists inside a big list, each spot will be randomly assigned a 1 or a 0. same thing for columns
 
+#randomize walls
+#select random integer either 0 or 1 for each spot in the list
+
 grid_row = [[[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
@@ -25,9 +28,6 @@ grid_col = [[[random.randint(0,0)],[random.randint(0,1)],[random.randint(0,1)],[
             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)]],
             [[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,1)],[random.randint(0,0)]]]
-#Make a function to randomize walls
-#select random integer either 0 or 1 for each spot in the list
-#maybe a return at the end would work
 
 #function to check solvability
 #check is coordinates on all side = 1 or 0
@@ -95,8 +95,9 @@ def draw(grid_row, grid_col):
                     turtle.penup()
             switch+=100
             turtle.goto(switch, -300)
+
+#function to setup exterior
 def setup():
-    
     turtle.speed(5)
     turtle.penup()
     turtle.goto(-300,-300)
@@ -117,11 +118,11 @@ def setup():
     turtle.goto(-300,-200)
     turtle.left(90)
 
+#call functions in order
+
 setup()
 isSolvable(grid_row, grid_col)
 draw(grid_row, grid_col)
     
 
 turtle.done()
-
-#while true loop, inside is function call for wall gen, then if solvable function is called, if it returns true, draw maze function (and break?), if it returns false continue the while loop.
