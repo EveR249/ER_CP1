@@ -3,6 +3,20 @@
 #Make different dictionaries for each part of the meal (entree, drink, appetizer, side, dessert)
 #inside each dictionary is 5 options and prices associated with them
 
+def receipt(total):
+    print("Here is your order:")
+    print(f"Drink: {drink_choice}")
+    print(f"Appetizer: {appetizer_choice}")
+    print(f"Entree: {entree_choice}")
+    print(f"Sides: {side_choice} and {side_choice2}")
+    print(f"Dessert: {dessert_choice} \n")
+    tip = float(input("How much do you want to tip (in dollars)? "))
+    tax = total*.2
+    total +=tax
+    total +=tip
+    print(f"Your total for the meal is ${total} \n")
+
+
 drink = {
     "Water" : 1.25,
     "Sprite" : 1.75,
@@ -44,7 +58,7 @@ dessert = {
 }
 
 
-total = 0
+total = 0.0
 drink_choice = 0
 #print out drink options
 #user input for drink, print out print, stupid proof, add price of selelction to total. 
@@ -129,6 +143,57 @@ while True:
 print(f"That will bring your total to ${total}\n")
 
 #DONT FORGET TO DO THE 2 SIDE DISHES
+#print out side options
+#user input for side, print out side, stupid proof, add price of selelction to total. 
+#check if they even said something on the menu
+#get them to select two
+while True:
+    for key in side:
+        print(key)
+    side_choice = input("What side would you like? ").strip().capitalize()
+    if side_choice == "French fries":
+        total += side[side_choice]
+        break
+    if side_choice == "Waffle fries":
+        total += side[side_choice]
+        break
+    if side_choice == "Curly fries":
+        total += side[side_choice]
+        break
+    if side_choice == "British chips":
+        total += side[side_choice]
+        break
+    if side_choice == "Smashed potatoes":
+        total += side[side_choice]
+        break
+    else:
+        print("We don't have that.\n")
+
+print(f"That will bring your total to ${total}\n")
+
+while True:
+    for key in side:
+        print(key)
+    side_choice2 = input("What side would you like for your second side? ").strip().capitalize()
+    if side_choice2 == "French fries":
+        total += side[side_choice2]
+        break
+    if side_choice2 == "Waffle fries":
+        total += side[side_choice2]
+        break
+    if side_choice2 == "Curly fries":
+        total += side[side_choice]
+        break
+    if side_choice2 == "British chips":
+        total += side[side_choice2]
+        break
+    if side_choice2 == "Smashed potatoes":
+        total += side[side_choice2]
+        break
+    else:
+        print("We don't have that.\n")
+
+print(f"That will bring your total to ${total}\n")
 
 #print out dessert options
 #user input for dessert, print out dessert, stupid proof, add price of selelction to total. 
@@ -158,3 +223,4 @@ while True:
 print(f"That will bring your total to ${total}\n")
 
 #print out their receipt and total
+receipt(total)
