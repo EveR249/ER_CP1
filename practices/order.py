@@ -3,6 +3,7 @@
 #Make different dictionaries for each part of the meal (entree, drink, appetizer, side, dessert)
 #inside each dictionary is 5 options and prices associated with them
 
+
 def receipt(total):
     print("Here is your order:")
     print(f"Drink: {drink_choice}")
@@ -14,7 +15,7 @@ def receipt(total):
     tax = total*.2
     total +=tax
     total +=tip
-    print(f"Your total for the meal is ${total} \n")
+    print(f"Your total for the meal is ${total:.2f} \n")
 
 
 drink = {
