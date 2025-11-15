@@ -46,52 +46,78 @@ menu = {
     }
 }
 
-def order():
+def order(total):
+    for key in menu["drinks"]:
+        print(key)
     while True:
-        user_drink = input("What drink would you like?: ")
+        user_drink = input("What drink would you like?: ").strip().capitalize()
         if user_drink in menu["drinks"].keys():
+            total += menu["drinks"][user_drink]
+            print()
             break
         else:
             print("Try again. ")
+    for key in menu["appetizers"]:
+        print(key)
     while True:
-        user_appetizer = input("What appetizer would you like?: ")
+        user_appetizer = input("What appetizer would you like?: ").strip().capitalize()
         if user_appetizer in menu["appetizers"].keys():
+            total += menu["appetizers"][user_appetizer]
+            print()
             break
         else:
             print("Try again. ")
+    for key in menu["entrees"]:
+        print(key)
     while True:
-        user_entree = input("What entree would you like?: ")
-        if user_entree in menu["entree"].keys():
+        user_entree = input("What entree would you like?: ").strip().capitalize()
+        if user_entree in menu["entrees"].keys():
+            total += menu["entrees"][user_entree]
+            print()
             break
         else:
             print("Try again. ")
+    for key in menu["sides"]:
+        print(key)
     while True:
-        user_side = input("What side would you like for your first side?: ")
+        user_side = input("What side would you like for your first side?: ").strip().capitalize()
         if user_side in menu["sides"].keys():
+            total += menu["sides"][user_side]
+            print()
             break
         else:
             print("Try again. ")
     while True:
-        user_side2 = input("What side would you like?: ")
+        user_side2 = input("What other side would you like?: ").strip().capitalize()
         if user_side2 in menu["sides"].keys():
+            total += menu["sides"][user_side2]
+            print()
             break
         else:
             print("Try again. ")
-    
-
-def receipt(total):
+    for key in menu["desserts"]:
+        print(key)
+    while True:
+        user_dessert = input("What dessert would you like?: ").strip().capitalize()
+        if user_dessert in menu["desserts"].keys():
+            total += menu["desserts"][user_dessert]
+            print()
+            break
+        else:
+            print("Try again. ")
     print("Here is your order:")
-    print(f"Drink: {drink_choice}")
-    print(f"Appetizer: {appetizer_choice}")
-    print(f"Entree: {entree_choice}")
-    print(f"Sides: {side_choice} and {side_choice2}")
-    print(f"Dessert: {dessert_choice} \n")
+    print(f"Drink: {user_drink}")
+    print(f"Appetizer: {user_appetizer}")
+    print(f"Entree: {user_entree}")
+    print(f"Sides: {user_side} and {user_side2}")
+    print(f"Dessert: {user_dessert} \n")
     tip = float(input("How much do you want to tip (in dollars)? "))
     tax = total*.2
     total +=tax
     total +=tip
     print(f"Your total for the meal is ${total:.2f} \n")
+    
 
 total = 0.0
 
-receipt(total)
+order(total)
