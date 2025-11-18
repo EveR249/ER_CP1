@@ -27,3 +27,5 @@ while True:
         nums.append(num)
     else:
         break
+
+sum()
