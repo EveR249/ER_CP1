@@ -14,18 +14,6 @@ def average(*nums):
     total = total/len(nums)
     print(f"\nResult: {total}")
 
-def max(*nums):
-    #look for max number in the list
-    for num in nums:
-        print(num)
-        #FIX THIS IT DOESNT WORK
-
-def min(*nums):
-    #look for smallest number
-    for num in nums:
-        print(num)
-        #FIX THIS TOO
-
 def product(*nums):
     total = 1
     for num in nums:
@@ -64,12 +52,14 @@ while cont == "yes":
         operation = int(input("What operation do you want to preform? (Input the number) \n1. Sum\n2. Average\n3. Max\n4. Min\n5. Product\n6. Exit the program\n"))
         continue
     if operation == 3:
-        max(*nums)
+        result = max(nums)
+        print(f"\nResult: {result}")
         cont = input("Would you like to preform another calculation? (yes/no) ").lower().strip()
         operation = int(input("What operation do you want to preform? (Input the number) \n1. Sum\n2. Average\n3. Max\n4. Min\n5. Product\n6. Exit the program\n"))
         continue
     if operation == 4:
-        min(*nums)
+        result = min(nums)
+        print(f"\nResult: {result}")
         cont = input("Would you like to preform another calculation? (yes/no) ").lower().strip()
         operation = int(input("What operation do you want to preform? (Input the number) \n1. Sum\n2. Average\n3. Max\n4. Min\n5. Product\n6. Exit the program\n"))
         continue
