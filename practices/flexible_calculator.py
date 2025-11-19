@@ -40,6 +40,7 @@ while True:
     
 cont = "yes"
 
+#check which operation was selected, call the function, and ask if they want to do another one. If they do then continue, also stupid proof
 while cont == "yes":
     if operation == 1:
         sum(*nums)
