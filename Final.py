@@ -1,5 +1,19 @@
 #ER Final CP1 2nd
 
+#Stats = {health: 100
+#Intelligence : 70
+#Agility : 70
+#Strength : 60}
+stats = {"health": 100,
+        "intelligence": 70,
+        "agility" : 70,
+        "strength" : 60}
+
+#Inventory = []
+inventory = []
+crowbar = 0
+keys = 0
+
 #def restart(stats, inventory):
 def restart(stats, inventory):
 #While true:
@@ -26,7 +40,7 @@ def restart(stats, inventory):
             visited = []
 
             #call hall function
-            hall()
+            hallroom()
         #if no
         if play == "no":
             #print thank you for playing
@@ -35,11 +49,11 @@ def restart(stats, inventory):
             break
 
 #Def hall(inventory, stats)
-def hall(inventory, stats, crowbar, keys):
+def hallroom(inventory, stats, crowbar, keys):
     #While True
     while True:
         #Input option what would you like to do? 1 look around 2 open the bronze door 3 #look at the cells
-        option = int(input("What would you like to do? \n1. Look around the hall \n2. Open the bronze door \/3. Look at the cells \n(Please input the number): "))
+        option = int(input("What would you like to do? \n1. Look around the hall \n2. Open the bronze door \n3. Look at the cells \n(Please input the number): "))
 
         #If option is 1 then look around and if variable for crowbar and keys is no, you see them
         if option == 1:
@@ -62,21 +76,32 @@ def hall(inventory, stats, crowbar, keys):
             if inventory == []:
                 print("We can't open this yet.")
             else:
+                num = 1
                 for i in inventory:
-                    print(i)
+                    print(f"{num}. {i}")
+                    num +=1
+            tool = int(input("Which tool do you select? (input the number)"))
             #If inventory has crowbar then you can open the door
             if crowbar == 1:
                 #As you open the door you hear a booming snarl
-        #Input are you ready to fight the final boss?
-        #If yes then go in and call boss combat function
-        #If no then turn around  and continue loop
+                print("As you open the door you hear a booming snarl...")
+                fight = input("Are you ready to fight the final boss? (yes/no) \n").strip().lower()
+				#If yes then go in and call boss combat function
+                if fight == "yes":
+                    boss()
+				#If no then turn around  and continue loop
+                else: 
+                    print("You go back to the main hall.")
+                    continue
 
         #Elif option is 3 then look at the cells
-        #Print each one is a different color, there are nine of them
-        #Input what cell do you want to look at 1 red 2 orange 3 yellow 4 green 5 blue 6 #indigo 7 violet 8 pink 9 white 10 back to dungeon hall
-
-            #If option is 10 then continue loop
-            #Elif it is color, call color function
+        elif option == 3:
+            print("There are 9 cells. Each one is a different color.")
+            choice = input("Which one would you like to open? \nRed \nOrange \nYellow \nGreen \nBlue \nIndigo \nViolet \nPink \nWhite \nBack to the dungeon hall \n (input the color or 'Hall' if you wish to return to the main dungeon hall. ").strip().lower()
+            
+            choice+"room"()
+				#If option is 10 then continue loop
+				#Elif it is color, call color function
 
     #Return inventory, stats
 
@@ -207,21 +232,13 @@ def hall(inventory, stats, crowbar, keys):
 
 #Return inventory, stats
 
+def boss():
+    num = 1
+    while num ==1:
+        num+=1
+
 #print welcome
 #print origin, woke up in a dungeon hall surrounded by cells with monsters and a giant bronze door. You begin to regain consciousness…
 
-#Stats = {health: 100
-#Intelligence : 70
-#Agility : 70
-#Strength : 60}
-stats = {"health": 100,
-        "intelligence": 70,
-        "agility" : 70,
-        "strength" : 60}
-
-#Inventory = []
-inventory = []
-crowbar = 0
-keys = 0
-
 #call hall function
+hallroom(inventory, stats, crowbar, keys)
