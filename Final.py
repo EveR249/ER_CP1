@@ -14,8 +14,10 @@ inventory = []
 crowbar = 0
 keys = 0
 
+visited = []
+
 #def restart(stats, inventory):
-def restart(stats, inventory):
+def restart(stats, inventory, crowbar, keys, visited):
 #While true:
     while True:
 	#Would you like to restart? 
@@ -35,9 +37,11 @@ def restart(stats, inventory):
                      "strength" : 60}
 
             #Inventory = {}
-            inventory = {}
+            inventory = []
 
             visited = []
+            crowbar = 0
+            keys = 0
 
             #call hall function
             hallroom()
@@ -49,7 +53,11 @@ def restart(stats, inventory):
             break
 
 #Def hall(inventory, stats)
-def hallroom(inventory, stats, crowbar, keys):
+def hallroom(inventory, stats, crowbar, keys, visited):
+    if "Dungeon Hall" in visited:
+        print("You have been here before")
+    else:
+        visited.append("Dungeon Hall")
     #While True
     while True:
         #Input option what would you like to do? 1 look around 2 open the bronze door 3 #look at the cells
@@ -66,7 +74,7 @@ def hallroom(inventory, stats, crowbar, keys):
                 inventory.append("Keys")
                 continue
             #Inventory add crowbar and keys
-            if crowbar and keys == 1:
+            if crowbar == 1 and keys == 1:
                 print("There is nothing left in this room.")
                 continue
             #Continue loop
@@ -81,42 +89,44 @@ def hallroom(inventory, stats, crowbar, keys):
                 for i in inventory:
                     print(f"{num}. {i}")
                     num +=1
-                    tool = int(input("Which tool do you select? (input the number)"))
-                    if tool == 1:
-                        print("As you open the door you hear a booming snarl...")
-                        fight = input("Are you ready to fight the final boss? (yes/no) \n").strip().lower()
-                        if fight == "yes":
-                               boss(inventory, stats, crowbar, keys)
-                        else:
-                            print("You go back to the main hall.")
-                            continue
-                    if tool == 2:
-                        print("The door won't open. You return to the hall.")
+                tool = int(input("Which tool do you select? (input the number)"))
+                if tool == 1:
+                    print("As you open the door you hear a booming snarl...")
+                    fight = input("Are you ready to fight the final boss? (yes/no) \n").strip().lower()
+                    if fight == "yes":
+                           boss(inventory, stats, crowbar, keys)
+                    else:
+                        print("You go back to the main hall.")
                         continue
-
+                if tool == 2:
+                    print("The door won't open. You return to the hall.")
+                    continue
         #Elif option is 3 then look at the cells
         elif option == 3:
             print("There are 9 cells. Each one is a different color.")
+            print("Here is what you have already visited: ")
+            for i in visited:
+                print(i)
             choice = input("Which one would you like to open? \nRed \nOrange \nYellow \nGreen \nBlue \nIndigo \nViolet \nPink \nWhite \nBack to the dungeon hall \n (input the color or 'Hall' if you wish to return to the main dungeon hall. ").strip().lower()
             
             if choice == "red":
-                redroom()
+                redroom(inventory, stats, crowbar, keys, visited)
             if choice == "orange":
-                orangeroom()
+                orangeroom(inventory, stats, crowbar, keys, visited)
             if choice == "yellow":
-                yellowroom()
+                yellowroom(inventory, stats, crowbar, keys, visited)
             if choice == "green":
-                greenroom()
+                greenroom(inventory, stats, crowbar, keys, visited)
             if choice == "blue":
-                blueroom()
+                blueroom(inventory, stats, crowbar, keys, visited)
             if choice == "indigo":
-                indigoroom()
+                indigoroom(inventory, stats, crowbar, keys, visited)
             if choice == "violet":
-                violetroom()
+                violetroom(inventory, stats, crowbar, keys, visited)
             if choice == "pink":
-                pinkroom()
+                pinkroom(inventory, stats, crowbar, keys, visited)
             if choice == "white":
-                whiteroom()
+                whiteroom(inventory, stats, crowbar, keys, visited)
             if choice == "hall":
                 continue
 				#If option is 10 then continue loop
@@ -127,9 +137,10 @@ def hallroom(inventory, stats, crowbar, keys):
 
 
 #Def red room (inventory, stats)
-def redroom(inventory, stats, crowbar, keys):
+def redroom(inventory, stats, crowbar, keys, visited):
 	#Print you go over to the red cell, inside is a large and hungry goblin.
     print("You go over to the red cell, inside is a large and hungry goblin.")
+    visited.append("Red Room")
 	#While true
     while True:
 		#Input would you like to open the cell?
@@ -137,89 +148,82 @@ def redroom(inventory, stats, crowbar, keys):
         if cell == "yes":
             if inventory == []:
                 print("We can't open this yet.")
-                hallroom(inventory, stats, crowbar, keys)
+                hallroom(inventory, stats, crowbar, keys, visited)
             else:
                 num = 1
                 for i in inventory:
                     print(f"{num}. {i}")
                     num +=1
-                    tool = int(input("Which tool do you select? (input the number)"))
-                    if tool == 1:
-                        print("The monster took your crowbar!")
-                        crowbar = 0
-                        inventory.remove("Crowbar")
-                    if tool == 2:
-                        print("The monster wants to fight! ")
-                        combat(inventory, stats, crowbar, keys)
-                        if combat(inventory, stats, crowbar, keys) == False:
-                            print("You died!")
-                            restart(stats, inventory)
-                        else:
-                            print("You defeated the monster!")
-                            search = input("Do you want to search the cell? (yes/no) ")
-                            if search == "yes":
-                                if crowbar == 0:
-                                    print("You got your crowbar back!")
-                                    crowbar = 1
-                                    inventory.append("Crowbar")
-                                if crowbar == 1:
-                                    print("There is nothing else in this room.")
-                                    print("You go back to the hall.")
-                                    hallroom(inventory, stats, crowbar, keys)
-                            else:
+                tool = int(input("Which tool do you select? (input the number)"))
+                if tool == 1:
+                    print("The monster took your crowbar!")
+                    crowbar = 0
+                    inventory.remove("Crowbar")
+                if tool == 2:
+                    print("The monster wants to fight! ")
+                    combat(inventory, stats, crowbar, keys)
+                    if combat(inventory, stats, crowbar, keys) == False:
+                        print("You died!")
+                        restart(stats, inventory)
+                    else:
+                        print("You defeated the monster!")
+                        search = input("Do you want to search the cell? (yes/no) ")
+                        if search == "yes":
+                            if crowbar == 0:
+                                print("You got your crowbar back!")
+                                crowbar = 1
+                                inventory.insert(0,"Crowbar")
+                            if crowbar == 1:
+                                print("There is nothing else in this room.")
                                 print("You go back to the hall.")
-                                hallroom(inventory, stats, crowbar, keys)
-return inventory, stats, crowbar, keys
-		
-			#Call combat function
-			#If combat is false 
-				#Print you died!
-				#Call restart function
-				#Break
-			#Else
-				#Print you defeated the monster!
-				#Do you want to search the cell?
-				#If yes then if crowbar = no you find it
-				#Add crowbar to inventory
-				#Print you go back to the hall
-				#Call hall function
-		#If inventory is empty
-			#print there is nothing you can use
-			#continue
-		#If option is no 
-			#Print you return to the hall
-			#Call hall function
-
-#Return inventory, stats
+                                hallroom(inventory, stats, crowbar, keys, visited)
+                        else:
+                            print("You go back to the hall.")
+                            hallroom(inventory, stats, crowbar, keys, visited)
+        if cell == "no":
+            print("You go back to the hall.")
+            hallroom(inventory, stats, crowbar, keys, visited)
+        return inventory, stats, crowbar, keys, visited
 
 
 #Def orange room (inventory, stats)
-	#Print you go over to the orange cell, inside is a small furry creature.
+def orangeroom(inventory, stats, crowbar, keys, visited):
+    print("You go over to the orange cell, inside is a small furry creature.")
+    if "Orange Room" in visited:
+        print("You have been here before")
+    else:
+        visited.append("Orange Room")
 	#While true
-#Input would you like to open the cell?
-	#If option is yes then
-#Print inventory
-#What do you want to use to open the cell?
-#If option is crowbar then
-	#Print the creature scratches you!
-	#Health lowered by 5
-	#If health is less that or = to 0 
-		#Print you died!
-		#Call restart function
-#If option is keys then 
-	#Print you opened the cell! The creature is scared of you and runs away!
-	#Do you want to search the cell?
-	#If yes then if potion = no you find it
-	#Add potion to inventory
-	#Print you go back to the hall
-	#Call hall function
-#If inventory is empty
-#print there is nothing you can use
-	#continue
-#If option is no 
-	#Print you return to the hall
-	#Call hall function
-#Return inventory, stats
+    while True:
+        cell = input("Would you like to open the cell? (yes/no) ")
+        if cell == "yes":
+            if inventory == []:
+                print("We can't open this yet.")
+                hallroom(inventory, stats, crowbar, keys, visited)
+            else:
+                num = 1
+                for i in inventory:
+                    print(f"{num}. {i}")
+                    num +=1
+                tool = int(input("Which tool do you select? (input the number)"))
+                if tool == 1:
+                    print("The creature scratched you!")
+                    stats["health"] -= 5
+                if tool == 2:
+                    print("The creature is scared and runs away!")
+                    search = input("Do you want to search the cell? (yes/no) ")
+                    if search == "yes":
+                        print("You found a potion!")
+                        inventory.append("Health Potion")
+                        print("You go back to the hall.")
+                        hallroom(inventory, stats, crowbar, keys, visited)
+                    if search == "no":
+                        print("You go back to the hall.")
+                        hallroom(inventory, stats, crowbar, keys, visited)
+        if cell == "no":
+            print("You go back to the hall.")
+            hallroom(inventory, stats, crowbar, keys, visited)
+        return inventory, stats, crowbar, keys, visited
 
 
 #Def yellow room (inventory, stats)
@@ -292,4 +296,7 @@ def boss():
 #print origin, woke up in a dungeon hall surrounded by cells with monsters and a giant bronze door. You begin to regain consciousness…
 
 #call hall function
-hallroom(inventory, stats, crowbar, keys)
+print("You woke up in a dungeon hall surrounded by cells full of monsters. Behind you is a giant bronze door. You begin to regain consciousness...\n")
+hallroom(inventory, stats, crowbar, keys, visited)
+
+#make it so potion is always at index 2. keys are always at index 1, crowbar is always at index 0, etc so then you can make specific instances for if they choose them
