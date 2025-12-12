@@ -1,4 +1,5 @@
 #ER Final CP1 2nd
+import random
 
 #Stats = {health: 100
 #Intelligence : 70
@@ -109,6 +110,15 @@ def hallroom(inventory, stats, crowbar, keys, potion, book, cookie, visited):
                 if tool == 2:
                     print("The door won't open. You return to the hall.")
                     continue
+                if tool == 3:
+                    print("We can't use this.")
+                    continue
+                if tool == 4:
+                    print("We can't use this.")
+                    continue
+                if tool == 5:
+                    print("We can't use this.")
+                    continue
         #Elif option is 3 then look at the cells
         elif option == 3:
             print("\nThere are 9 cells. Each one is a different color.")
@@ -163,32 +173,16 @@ def redroom(inventory, stats, crowbar, keys, potion, book, cookie, visited):
                     print(f"{num}. {i}")
                     num +=1
                 tool = int(input("Which tool do you select? (input the number)"))
-                if tool == 1:
+                if tool == 1 and crowbar ==1:
                     print("The monster took your crowbar!")
                     crowbar = 0
-                    inventory.remove("Crowbar")
+                    continue
+                if tool == 1 and crowbar !=1:
+                    print("You can't use this")
                     continue
                 if tool == 2:
                     print("The monster wants to fight! ")
                     combat(inventory, stats, crowbar, potion, book, cookie, keys)
-                    if combat(inventory, stats, crowbar, potion, book, cookie, keys) == False:
-                        print("You died!")
-                        restart(inventory, stats, crowbar, keys, potion, book, cookie, visited)
-                    else:
-                        print("You defeated the monster!")
-                        search = input("Do you want to search the cell? (yes/no) ").strip().lower()
-                        if search == "yes":
-                            if crowbar == 0:
-                                print("You got your crowbar back!")
-                                crowbar = 1
-                                inventory.insert(0,"Crowbar")
-                            if crowbar == 1:
-                                print("There is nothing else in this room.")
-                                print("You go back to the hall.")
-                                hallroom(inventory, stats, crowbar, keys, potion, book, cookie, visited)
-                        else:
-                            print("You go back to the hall.")
-                            hallroom(inventory, stats, crowbar, keys, potion, book, cookie, visited)
                 if tool == 3:
                     print("We can't use this.")
                     continue
@@ -257,7 +251,6 @@ def orangeroom(inventory, stats, crowbar, keys, potion, book, cookie, visited):
             hallroom(inventory, stats, crowbar, keys, potion, book, cookie, visited)
         return inventory, stats, crowbar, keys, potion, book, cookie, visited
 
-
 #Def yellow room (inventory, stats)
 def yellowroom(inventory, stats, crowbar, keys, potion, book, cookie, visited):
     print("You go over to the yellow cell, inside is a giant sleeping chameleon.")
@@ -308,7 +301,6 @@ def yellowroom(inventory, stats, crowbar, keys, potion, book, cookie, visited):
             print("You go back to the hall.")
             hallroom(inventory, stats, crowbar, keys, potion, book, cookie, visited)
         return inventory, stats, crowbar, keys, potion, book, cookie, visited
-
 
 #Def green room (inventory, stats)
 def greenroom(inventory, stats, crowbar, keys, potion, book, cookie, visited):
@@ -596,15 +588,126 @@ def whiteroom(inventory, stats, crowbar, keys, potion, book, cookie, visited):
             hallroom(inventory, stats, crowbar, keys, potion, book, cookie, visited)
         return inventory, stats, crowbar, keys, potion, book, cookie, visited
 
-def boss():
-    num = 1
-    while num ==1:
-        num+=1
+def boss(inventory, stats, crowbar, keys, potion, book, cookie):
+    boss_stats = {"health" : 150,
+                  "intelligence" : 30,
+                  "agility" : 30,
+                  "strength" : 90}
+    while boss_stats["health"] > 0 or stats["health"] >0:
+        num = 1
+        for i in inventory:
+            print(f"{num}. {i}")
+            num +=1
+        tool = int(input("Which combat tool do you select? (input the number)"))
+        if tool == 1 and crowbar == 1:
+            print("You pummel the monster with your crowbar: ")
+            dmg = stats["strength"]+15 /5
+            boss_stats["health"] = boss_stats["health"] - dmg
+            print(f"Boss health: {boss_stats["health"]}")
+        if tool == 1 and crowbar != 1:
+            print("You can't use this.")
+            continue
+        if tool == 2 and keys == 1:
+            print("You stab the monster with your keys: ")
+            dmg = stats["strength"] /5 + stats["agility"] /10
+            boss_stats["health"] = boss_stats["health"] - dmg
+            print(f"Boss health: {boss_stats["health"]}")
+        if tool == 2 and keys != 1:
+            print("You can't use this.")
+            continue
+        if tool == 3 and potion == 1:
+            print("You drink a health potion +15")
+            stats["health"] +=15
+            potion = 0
+        if tool == 3 and potion != 1:
+            print("You can't use this.")
+            continue
+        if tool == 4 and book == 1:
+            print("You whack the monster with the book:")
+            dmg = stats["intelligence"] /5
+            boss_stats["health"] = boss_stats["health"] - dmg
+            print(f"Boss health: {boss_stats["health"]}")
+        if tool == 4 and book !=1:
+            print("You can't use this.")
+            continue
+        if tool == 5:
+            print("You can't use this.")
+            continue
+        if boss_stats["health"] <= 0:
+            print("You won the game!")
+            restart(inventory, stats, crowbar, keys, potion, book, cookie, visited)
+        if stats["health"] <= 0:
+            print("You lost the game!")
+            restart(inventory, stats, crowbar, keys, potion, book, cookie, visited)
+        mnstr_dmg = boss_stats["strength"] /5
+        print("The monster clubbed you!")
+        stats["health"] = stats["health"] - mnstr_dmg
+        print(f"Your health: {stats["health"]}")
+        continue
+        
 
-def combat():
-    num = 1
-    while num ==1:
-        num+=1
+def combat(inventory, stats, crowbar, keys, potion, book, cookie):
+    enemy_stats = {"health" : 70,
+                  "intelligence" : 20,
+                  "agility" : 60,
+                  "strength" : 50}
+    while enemy_stats["health"] > 0 or stats["health"] >0:
+        num = 1
+        for i in inventory:
+            print(f"{num}. {i}")
+            num +=1
+        tool = int(input("Which combat tool do you select? (input the number)"))
+        if tool == 1 and crowbar == 1:
+            print("You pummel the monster with your crowbar: ")
+            dmg = stats["strength"]+15 /15
+            enemy_stats["health"] = enemy_stats["health"] - dmg
+            print(f"Enemy health: {enemy_stats["health"]}")
+        if tool == 1 and crowbar != 1:
+            print("You can't use this.")
+            continue
+        if tool == 2:
+            print("You stab the monster with your keys: ")
+            dmg = stats["strength"] /5 + stats["agility"] /10
+            enemy_stats["health"] = enemy_stats["health"] - dmg
+            print(f"Enemy health: {enemy_stats["health"]}")
+        if tool == 3 and potion == 1:
+            print("You drink a health potion +15")
+            stats["health"] +=15
+            potion = 0
+        if tool == 3 and potion != 1:
+            print("You can't use this.")
+            continue
+        if tool == 4 and book == 1:
+            print("You whack the monster with the book:")
+            dmg = stats["intelligence"] /5
+            enemy_stats["health"] = enemy_stats["health"] - dmg
+            print(f"Enemy health: {enemy_stats["health"]}")
+        if tool == 4 and book !=1:
+            print("You can't use this.")
+            continue
+        if tool == 5:
+            print("You can't use this.")
+            continue
+        if enemy_stats["health"] <= 0:
+            print("You defeated the monster!")
+            if crowbar == 0:
+                print("You got your crowbar back!")
+                crowbar = 1
+            if crowbar == 1:
+                print("There is nothing else in this room.")
+                print("You go back to the hall.")
+                hallroom(inventory, stats, crowbar, keys, potion, book, cookie, visited)
+            else:
+                print("You go back to the hall.")
+                hallroom(inventory, stats, crowbar, keys, potion, book, cookie, visited)
+        if stats["health"] <= 0:
+            print("You lost the game!")
+            restart(inventory, stats, crowbar, keys, potion, book, cookie, visited)
+        mnstr_dmg = enemy_stats["strength"] /5
+        print("The monster clubbed you!")
+        stats["health"] = stats["health"] - mnstr_dmg
+        print(f"Your health: {stats["health"]}")
+        continue
 
 #print welcome
 #print origin, woke up in a dungeon hall surrounded by cells with monsters and a giant bronze door. You begin to regain consciousness…
