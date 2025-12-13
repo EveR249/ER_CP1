@@ -26,7 +26,7 @@ def restart(inventory, stats, crowbar, keys, potion, book, cookie, monster, visi
 #While true:
     while True:
 	#Would you like to restart? 
-        play = input("Would you like to restart? (yes/no) ").strip().lower()
+        play = input("Would you like to start? (yes/no) ").strip().lower()
 	#if yes 
         if play == "yes":
 		#print origin, woke up in a dungeon hall surrounded by cells with monsters and a giant bronze door. You begin to regain consciousness…
@@ -59,8 +59,8 @@ def restart(inventory, stats, crowbar, keys, potion, book, cookie, monster, visi
             #print thank you for playing
             print("Thank you for playing!")
             #break
-            break
-        break
+            return 0
+        return 0
     
 
 #Def hall(inventory, stats)
@@ -716,6 +716,8 @@ def combat(inventory, stats, crowbar, keys, potion, book, cookie):
 
 #call hall function
 while True:
+    if restart(inventory, stats, crowbar, keys, potion, book, cookie, monster, visited) == 0:
+        break
     print("You woke up in a dungeon hall surrounded by cells full of monsters. Behind you is a giant bronze door. You begin to regain consciousness...")
     hallroom(inventory, stats, crowbar, keys, potion, book, cookie, monster, visited)
 
