@@ -1,5 +1,4 @@
 #ER Final CP1 2nd
-import random
 
 #Stats = {health: 100
 #Intelligence : 70
