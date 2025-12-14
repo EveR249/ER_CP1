@@ -596,7 +596,7 @@ def whiteroom(inventory, stats, crowbar, keys, potion, book, cookie, monster, vi
         return inventory, stats, crowbar, keys, potion, book, cookie, monster, visited
 
 def boss(inventory, stats, crowbar, keys, potion, book, cookie):
-    boss_stats = {"health" : 100,
+    boss_stats = {"health" : 90,
                   "intelligence" : 30,
                   "agility" : 30,
                   "strength" : 90}
@@ -606,51 +606,40 @@ def boss(inventory, stats, crowbar, keys, potion, book, cookie):
             print(f"{num}. {i}")
             num +=1
         tool = int(input("Which combat tool do you select? (input the number)"))
-        if tool == 1 and crowbar == 1:
+        if tool == 1:
             print("You pummel the monster with your crowbar: ")
             dmg = stats["strength"] /5
             boss_stats["health"] -= dmg
             print(f"Boss health: {boss_stats["health"]}")
-        if tool == 1 and crowbar != 1:
-            print("You can't use this.")
-            continue
-        if tool == 2 and keys == 1:
+        if tool == 2:
             print("You stab the monster with your keys: ")
             dmg = stats["strength"] /10 + stats["agility"] /10
             boss_stats["health"] = boss_stats["health"] - dmg
             print(f"Boss health: {boss_stats["health"]}")
-        if tool == 2 and keys != 1:
-            print("You can't use this.")
-            continue
-        if tool == 3 and potion == 1:
+        if tool == 3:
             print("You drink a health potion +15")
             stats["health"] +=15
             potion = 0
-        if tool == 3 and potion != 1:
-            print("You can't use this.")
-            continue
-        if tool == 4 and book == 1:
+        if tool == 4:
             print("You whack the monster with the book:")
             dmg = stats["intelligence"] /10
             boss_stats["health"] = boss_stats["health"] - dmg
             print(f"Boss health: {boss_stats["health"]}")
-        if tool == 4 and book !=1:
-            print("You can't use this.")
-            continue
         if tool == 5:
             print("You can't use this.")
             continue
         if boss_stats["health"] <= 0:
             print("You won the game!")
             restart(inventory, stats, crowbar, keys, potion, book, cookie, monster, visited)
-        if stats["health"] <= 0:
-            print("You lost the game!")
-            restart(inventory, stats, crowbar, keys, potion, book, cookie, monster, visited)
         mnstr_dmg = boss_stats["strength"] /5
         print("The monster clubbed you!")
         stats["health"] = stats["health"] - mnstr_dmg
         print(f"Your health: {stats["health"]}")
-        continue
+        if stats["health"] <= 0:
+            print("You lost the game!")
+            restart(inventory, stats, crowbar, keys, potion, book, cookie, monster, visited)
+        else:
+            continue
         
 
 def combat(inventory, stats, crowbar, keys, potion, book, cookie):
